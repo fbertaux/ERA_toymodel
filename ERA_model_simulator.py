@@ -112,7 +112,7 @@ def compare_regulation_functions(fE_reg_funs):
         for fun_name,fE_fun in fE_reg_funs:
             t,e,r,a = simulate_regulation(params=params,
                                                               fE_reg_fun=fE_fun,
-                                                              duration=40,
+                                                              duration=60,
                                                               e0=0, r0=0.5, a0=0.5)
             ax.plot(t, params['k'] * e, label=fun_name)
         ax.set_title(f'k = {k}')
@@ -123,7 +123,7 @@ def compare_regulation_functions(fE_reg_funs):
 
 print('Exploration of the model behavior (press Run Interact to update)')
 @interact_manual
-def display_model_behavior(fE=(0,1,0.01), k=(0.01,10,0.01), E_0=(0,10,1), R_0=(0,10,1), A_0=(0,10,1), duration=(5,60,5)):
+def display_model_behavior(fE=(0,1,0.01), k=(0.01,10,0.01), E_0=(0,10,1), R_0=(0,10,1), A_0=(0,10,1), duration=(2.5,80,2.5)):
     params = {'sigma':1, 'k':k, 'a_sat':0.01, 'f_E':fE}
     t, E, R, A, V, e, r, a = simulate(params=params, duration=duration, E0=E_0, R0=R_0, A0=A_0)
     growth_fit = np.polyfit(t[-5:], np.log(V[-5:]), 1)
@@ -148,7 +148,7 @@ def display_model_behavior(fE=(0,1,0.01), k=(0.01,10,0.01), E_0=(0,10,1), R_0=(0
 
 print('Exploration of model behavior using the concentration ODEs (press Run Interact to update)')
 @interact_manual
-def display_model_conc_behavior(fE=(0,1,0.01), k=(0.01,10,0.01), duration=(5,60,5)):
+def display_model_conc_behavior(fE=(0,1,0.01), k=(0.01,10,0.01), duration=(2.5,80,2.5)):
     params = {'sigma':1, 'k':k, 'a_sat':0.01, 'f_E':fE}
     e0, r0, a0 = 0, 0.5, 0.5
     t, e, r, a = simulate_conc(params=params, duration=duration, e0=e0, r0=r0, a0=a0)
@@ -157,7 +157,7 @@ def display_model_conc_behavior(fE=(0,1,0.01), k=(0.01,10,0.01), duration=(5,60,
 
 print('Exploration of how the allocation strategy impacts the growth rate (press Run Interact to update)')
 @interact_manual
-def explore_allocation(k=(0.01,10,0.01), duration=(5,60,5)):
+def explore_allocation(k=(0.01,10,0.01), duration=(2.5,80,2.5)):
     params = {'sigma':1, 'k':k, 'a_sat':0.01}
     e0, r0, a0 = 0, 0.5, 0.5
     fE_vec = np.linspace(0,1,21)
