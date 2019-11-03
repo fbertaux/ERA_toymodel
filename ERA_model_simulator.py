@@ -112,13 +112,13 @@ def compare_regulation_functions(fE_reg_funs):
         for fun_name,fE_fun in fE_reg_funs:
             t,e,r,a = simulate_regulation(params=params,
                                                               fE_reg_fun=fE_fun,
-                                                              duration=60,
+                                                              duration=80,
                                                               e0=0, r0=0.5, a0=0.5)
             ax.plot(t, params['k'] * e, label=fun_name)
         ax.set_title(f'k = {k}')
         ax.set_xlabel('Time')
         ax.set_ylabel('Growth rate')
-        ax.legend()
+        ax.legend(loc='lower right')
     plt.show()
 
 print('Exploration of the model behavior (press Run Interact to update)')
